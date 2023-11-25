@@ -152,7 +152,7 @@ def get_valid_moves(lines, columns, white_positions, black_positions, turn) :
 ## A função abaixo é um jogador. Ele receberá um tabuleiro
 ## como parâmetro pelas variáveis  lines, columns, white_positions,
 ## black_positions.
-def rnadom_player(lines, columns, white_positions, black_positions, turn) :
+def random_player(lines, columns, white_positions, black_positions, turn) :
     valid_moves = get_valid_moves(lines, columns, white_positions, black_positions, turn)
     if valid_moves :
         return random.choice(valid_moves)
@@ -166,14 +166,11 @@ def human_player(lines, columns, white_positions, black_positions, turn) :
 
 
 ## O parâmetro flip_black_board será usado mais adiante.
-def generate_image_history(history, flip_black_board = False) :
+def generate_image_history(lines, columns, history) :
     image_history = []
-    lines, columns = history[0]
 
-    for i in range(1, len(history)) :
-        white_positions, black_positions = history[i]
-        if ( flip_black_board and (i % 2 == 1) ) :
-            lines, columns, white_positions, black_positions = flip_board(lines, columns, white_positions, black_positions)
+    for i in range(len(history)) :
+        turn, white_positions, black_positions = history[i]
         image_history.append( draw_board(lines, columns, white_positions, black_positions ) )
     return image_history
 
@@ -189,7 +186,7 @@ def game(player1, player2, lines = 5, columns = 5,
     result = 0
 
     ## Lista que guardará o histórico
-    history = [ (lines, columns), (white_positions, black_positions)  ]
+    history = [ (1, white_positions, black_positions)  ]
 
     ## Enquanto houverem jogadas, pedimos para o jogador vez prosseguir
     win = winner(lines, columns, white_positions, black_positions)
@@ -223,13 +220,14 @@ def game(player1, player2, lines = 5, columns = 5,
                 lwhite_positions.remove(destino)
                 white_positions = tuple(lwhite_positions)
 
+        ## Trocando a vez de jogar
+        turn = -turn
+                
         ## Adicionando tabuleiro no histórico
-        history.append( (white_positions, black_positions) )
+        history.append( (turn, white_positions, black_positions) )
 
         ## Atualizando a variável que verifica ganhador.
         win = winner(lines, columns, white_positions, black_positions)
 
-        ## Trocando a vez de jogar
-        turn = -turn
 
     return win, history
