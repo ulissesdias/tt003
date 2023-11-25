@@ -1,5 +1,6 @@
 from IPython.display import display # para mostrar imagens
 from PIL import Image, ImageDraw    # para ler imagens
+from ipywidgets import interact
 
     
 ## O nosso jogador fará uma jogada ao acaso, então usamos
