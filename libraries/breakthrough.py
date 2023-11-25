@@ -179,7 +179,8 @@ def generate_image_history(lines, columns, history) :
 ## Abaixo uma função que gerencia um jogo.
 def game(player1, player2, lines = 5, columns = 5,
          white_positions = ( (1,1), (1,2), (1,3), (1,4), (1,5) ),
-         black_positions = ( (5,1), (5,2), (5,3), (5,4), (5,5) ) ) :
+         black_positions = ( (5,1), (5,2), (5,3), (5,4), (5,5) ),
+         epsilon = None) :
     
     ## Inicialização
     turn   = 1
@@ -194,8 +195,11 @@ def game(player1, player2, lines = 5, columns = 5,
 
         ## Pedindo uma jogada ao jogador da vez.
         if turn == 1 :
-            origem, destino = player1(lines, columns, white_positions, black_positions, turn)
-
+            if epsilon == None :
+                origem, destino = player1(lines, columns, white_positions, black_positions, turn)
+            else :
+                origem, destino = player1(lines, columns, white_positions, black_positions, turn, epsilon = epsilon)
+                
             lwhite_positions = list(white_positions)
             lwhite_positions.remove(origem)
             lwhite_positions.append(destino)
@@ -207,8 +211,11 @@ def game(player1, player2, lines = 5, columns = 5,
                 black_positions = tuple(lblack_positions)
 
         else :
-            origem, destino = player2(lines, columns, white_positions, black_positions, turn)
-
+            if epsilon == None :
+                origem, destino = player2(lines, columns, white_positions, black_positions, turn)
+            else :
+                origem, destino = player2(lines, columns, white_positions, black_positions, turn, epsilon)
+                
             lblack_positions = list(black_positions)
             lblack_positions.remove(origem)
             lblack_positions.append(destino)
