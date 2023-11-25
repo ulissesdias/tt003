@@ -140,7 +140,7 @@ def get_valid_moves(lines, columns, white_positions, black_positions, turn) :
         lines, columns, white_positions, black_positions = ltabuleiro
         flipped_moves = get_valid_white_moves(lines, columns, white_positions, black_positions)
         moves = []
-        for move in flipped_move :
+        for move in flipped_moves :
             new_move = []
             for coord in move :
                 new_move.append(
