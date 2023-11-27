@@ -152,7 +152,7 @@ def get_valid_moves(lines, columns, white_positions, black_positions, turn) :
 ## A função abaixo é um jogador. Ele receberá um tabuleiro
 ## como parâmetro pelas variáveis  lines, columns, white_positions,
 ## black_positions.
-def random_player(lines, columns, white_positions, black_positions, turn) :
+def random_player(lines, columns, white_positions, black_positions, turn, epsilon = None) :
     valid_moves = get_valid_moves(lines, columns, white_positions, black_positions, turn)
     if valid_moves :
         return random.choice(valid_moves)
