@@ -157,7 +157,7 @@ def random_player(lines, columns, white_positions, black_positions, turn, epsilo
     if valid_moves :
         return random.choice(valid_moves)
 
-def human_player(lines, columns, white_positions, black_positions, turn) :
+def human_player(lines, columns, white_positions, black_positions, turn, epsilon = None) :
     board = draw_board(lines, columns, white_positions, black_positions)
     display(board)
     print("Jogue no formato '(origemLine, origemColumn), (destinoLine, destinoColumn)' ")
